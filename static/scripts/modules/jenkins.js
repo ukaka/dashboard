@@ -38,7 +38,7 @@ define('jenkins', ['jquery', 'spinner', 'mustache'], function($, spinner, mustac
             //if (jenkinsBuildData['child_runs_count'] > 0) {
             //    $counter.text(failedCount + '/' + jenkinsBuildData['child_runs_count']);
             //} else {
-                //$($dashboardItem.find('.pie')[0]).hide();
+                $($dashboardItem.find('.pie')[0]).hide();
             //}
 
             if (jenkinsBuildData['status'] === 'UNSTABLE') {
