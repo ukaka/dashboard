@@ -44,7 +44,7 @@ define('jenkins-api', ['jquery', 'spinner', 'mustache'], function($, spinner, mu
             if (jenkinsBuildData['status'] === 'FAILURE' || jenkinsBuildData['status'] === 'UNSTABLE') {
                 $dashboardItem.find('h2').addClass('failed');
             } else {
-                $dashboardItem.find('h2').addClass('success')
+                $dashboardItem.find('h2').addClass('success');
             }
             cb();
         });
