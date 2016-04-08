@@ -10,6 +10,7 @@ from jenkinsapi.jenkins import Jenkins
 from requests.exceptions import ConnectionError
 
 
+JOB_URL_ENDING = "testReport/api/python"
 app = Flask(__name__)
 
 
@@ -54,6 +55,10 @@ def get_build_data(build_name):
     last_build_number = build.get_last_buildnumber()
     child_runs = last_build.get_matrix_runs()
     child_runs_count = 0
+    results_url = last_build.get_result_url()
+    if results_url.endswith(JOB_URL_ENDING):
+        results_url = results_url[:results_url.find(JOB_URL_ENDING)]
+
     failed_runs = []
     return_val = {
         'name': build_name,
@@ -80,6 +85,7 @@ def get_build_data(build_name):
                         'name': current_build.name.split('\xbb')[1].split(',')[0]
                     })
 
+    return_val['results_url'] = results_url
     return_val['failed_runs'] = failed_runs
     return_val['has_failed_runs'] = (len(failed_runs) != 0)
     return_val['child_runs_count'] = child_runs_count
@@ -119,7 +125,7 @@ def get_build_data_api(build_name):
         if has_next:
             child_runs_count += 1
             if current_build.get_number() == last_build_number \
-                    and current_build.get_status() == 'FAILURE' or current_build.get_status() == 'UNSTABLE':
+                    and (current_build.get_status() == 'FAILURE' or current_build.get_status() == 'UNSTABLE'):
                 failed_runs.append({
                     'name': current_build.name.split('\xbb')[1].split(',')[0]
                 })
