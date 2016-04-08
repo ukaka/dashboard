@@ -3,19 +3,21 @@
     {
       "id": "mobileAppsUITests",
       "data_source": "jenkins",
-      "screen_items": ["wikia-swa-espresso-tests-all", "wikia-swa-espresso-tests-basic"],
-      "update_interval": 36000
+      "screen_items": ["wikia-swa-espresso-tests-all", "wikia-swa-tests-monkey",
+                          "wikia-swa-android-tests", "wikia-swa-matrix-android-dev"],
+      "update_interval": 360000
     },
     {
-      "id": "mobileAppsBuilds",
+      "id": "mobileAppsAPITests",
       "data_source": "jenkins",
-      "screen_items": ["wikia-swa-android-tests", "wikia-swa-matrix-android-dev"],
-      "update_interval": 36000
+      "screen_items": ["api-mobile-preview-tests", "api-mobile-production-tests",
+                          "api-mobile-public-service-tests", "api-mobile-public-service-dev-tests"],
+      "update_interval": 360000
     }
   ],
   "sources": {
     "jenkins": {
-      "url": "http://qa-s2:8080"
+      "url": "http://jenkins:8080"
     },
     "jenkins-api": {
       "url": "http://api-test-s1:8080"
