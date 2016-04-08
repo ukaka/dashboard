@@ -35,13 +35,13 @@ define('jenkins', ['jquery', 'spinner', 'mustache'], function($, spinner, mustac
             $dashboardItem.html(rendered);
 
             $counter = $($dashboardItem.find('.results-counter')[0]);
-            //if (jenkinsBuildData['child_runs_count'] > 0) {
-            //    $counter.text(failedCount + '/' + jenkinsBuildData['child_runs_count']);
-            //} else {
+            if (jenkinsBuildData['child_runs_count'] > 0) {
+                $counter.text(failedCount + '/' + jenkinsBuildData['child_runs_count']);
+            } else {
                 $($dashboardItem.find('.pie')[0]).hide();
-            //}
+            }
 
-            if (jenkinsBuildData['status'] === 'UNSTABLE') {
+            if (jenkinsBuildData['status'] === 'UNSTABLE' || jenkinsBuildData['status'] === 'FAILURE') {
                 $dashboardItem.find('h2').addClass('failed');
             } else {
                 $dashboardItem.find('h2').addClass('success');
@@ -68,7 +68,7 @@ define('jenkins', ['jquery', 'spinner', 'mustache'], function($, spinner, mustac
                     $($dashboardItem.find('.pie')[0]).hide();
                 }
 
-                if (jenkinsBuildData['status'] === 'UNSTABLE') {
+                if (jenkinsBuildData['status'] === 'UNSTABLE' || jenkinsBuildData['status'] === 'FAILURE') {
                     $dashboardItem.find('h2').addClass('failed');
                 } else {
                     $dashboardItem.find('h2').addClass('success');
