@@ -62,24 +62,24 @@ def get_build_data(build_name):
     }
 
     print "STATUS" + last_build.get_status()
-    # if item_config.has_key('artifact'):
-    #     output = Artifact('output', item_config['artifact'], last_build).get_data()
-    #     return_val['artifact_output'] = output
-    # else:
-    has_next = True
-    while has_next:
-        try:
-            current_build = child_runs.next()
-        except StopIteration:
-            has_next = False
+    if item_config.has_key('artifact'):
+        output = Artifact('output', item_config['artifact'], last_build).get_data()
+        return_val['artifact_output'] = output
+    else:
+        has_next = True
+        while has_next:
+            try:
+                current_build = child_runs.next()
+            except StopIteration:
+                has_next = False
 
-        if has_next:
-            child_runs_count += 1
-            if current_build.get_number() == last_build_number\
-                    and current_build.get_status() == 'FAILURE' or current_build.get_status() == 'UNSTABLE':
-                failed_runs.append({
-                    'name': current_build.name.split('\xbb')[1].split(',')[0]
-                })
+            if has_next:
+                child_runs_count += 1
+                if current_build.get_number() == last_build_number\
+                        and current_build.get_status() == 'FAILURE' or current_build.get_status() == 'UNSTABLE':
+                    failed_runs.append({
+                        'name': current_build.name.split('\xbb')[1].split(',')[0]
+                    })
 
     return_val['failed_runs'] = failed_runs
     return_val['has_failed_runs'] = (len(failed_runs) != 0)
