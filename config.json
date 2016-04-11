@@ -1,7 +1,7 @@
 {
   "screens": [
     {
-      "id": "mobileAppsUITests",
+      "id": "mobileAppsAndroidTests",
       "data_source": "jenkins",
       "screen_items": ["wikia-swa-espresso-tests-all", "wikia-swa-tests-monkey",
                           "wikia-swa-android-tests", "wikia-swa-matrix-android-dev"],
@@ -12,6 +12,12 @@
       "data_source": "jenkins",
       "screen_items": ["api-mobile-preview-tests", "api-mobile-production-tests",
                           "api-mobile-public-service-tests", "api-mobile-public-service-dev-tests"],
+      "update_interval": 360000
+    },
+    {
+      "id": "mobileAppsiOSTests",
+      "data_source": "jenkins",
+      "screen_items": ["wikia-ca-ios-tests", "wikia-ca-matrix-ios"],
       "update_interval": 360000
     }
   ],

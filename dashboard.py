@@ -60,6 +60,7 @@ def get_build_data(build_name):
         results_url = results_url[:results_url.find(JOB_URL_ENDING)]
 
     failed_runs = []
+    success_runs = []
     return_val = {
         'name': build_name,
         'status': last_build.get_status(),
@@ -84,10 +85,17 @@ def get_build_data(build_name):
                     failed_runs.append({
                         'name': current_build.name.split('\xbb')[1].split(',')[0]
                     })
+                elif current_build.get_number() == last_build_number and current_build.get_status() == 'SUCCESS'\
+                        and (build_name.endswith("dev") or build_name.endswith("ios")):
+                    success_runs.append({
+                        'name': current_build.name.split('\xbb')[1].split(',')[0]
+                    })
 
     return_val['results_url'] = results_url
     return_val['failed_runs'] = failed_runs
     return_val['has_failed_runs'] = (len(failed_runs) != 0)
+    return_val['success_runs'] = success_runs
+    return_val['has_success_runs'] = (len(success_runs) != 0)
     return_val['child_runs_count'] = child_runs_count
     return_val['failure_percentage'] = len(failed_runs) * 100 / child_runs_count if (child_runs_count != 0) else 100
 
