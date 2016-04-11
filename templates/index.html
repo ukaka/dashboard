@@ -32,6 +32,16 @@
                 </ul>
                 </div>
             {{/has_failed_runs}}
+            {{#has_success_runs}}
+                <div class="failed-tests-label">Built apps:</div>
+                <div class="jenkins-details">
+                <ul>
+                {{#success_runs}}
+                    <li class="list-item"><span>{{name}}</span></li>
+                {{/success_runs}}
+                </ul>
+                </div>
+            {{/has_success_runs}}
         </div>
         <div class="right-column">
             <div class="header-right">
