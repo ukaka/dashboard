@@ -17,7 +17,8 @@
     {
       "id": "mobileAppsiOSTests",
       "data_source": "jenkins",
-      "screen_items": ["wikia-ca-ios-tests", "wikia-ca-matrix-ios"],
+      "screen_items": ["wikia-ca-ios-tests", "wikia-ca-matrix-ios",
+                          "wikia-ca-matrix-ios-tests-nightly", "wikia-ca-ios-kif-tests"],
       "update_interval": 360000
     }
   ],
